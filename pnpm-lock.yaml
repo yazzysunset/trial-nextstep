@@ -89,9 +89,6 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: 1.1.8
         version: 1.1.8(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@18.3.1))(react@18.3.1)
-      '@vercel/analytics':
-        specifier: latest
-        version: 1.5.0(next@16.0.3(react-dom@19.2.0(react@18.3.1))(react@18.3.1)(sass@1.94.2))(react@18.3.1)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1710,32 +1707,6 @@ packages:
 
   '@types/react@19.2.6':
     resolution: {integrity: sha512-p/jUvulfgU7oKtj6Xpk8cA2Y1xKTtICGpJYeJXz2YVO2UcvjQgeRMLDGfDeqeRW2Ta+0QNFwcc8X3GH8SxZz6w==}
-
-  '@vercel/analytics@1.5.0':
-    resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
-    peerDependencies:
-      '@remix-run/react': ^2
-      '@sveltejs/kit': ^1 || ^2
-      next: '>= 13'
-      react: ^18 || ^19 || ^19.0.0-rc
-      svelte: '>= 4'
-      vue: ^3
-      vue-router: ^4
-    peerDependenciesMeta:
-      '@remix-run/react':
-        optional: true
-      '@sveltejs/kit':
-        optional: true
-      next:
-        optional: true
-      react:
-        optional: true
-      svelte:
-        optional: true
-      vue:
-        optional: true
-      vue-router:
-        optional: true
 
   '@vitejs/plugin-react-swc@3.10.2':
     resolution: {integrity: sha512-xD3Rdvrt5LgANug7WekBn1KhcvLn1H3jNBfJRL3reeOIua/WnZOEV5qi5qIBq5T8R0jUDmRtxuvk4bPhzGHDWw==}
@@ -3998,11 +3969,6 @@ snapshots:
   '@types/react@19.2.6':
     dependencies:
       csstype: 3.2.3
-
-  '@vercel/analytics@1.5.0(next@16.0.3(react-dom@19.2.0(react@18.3.1))(react@18.3.1)(sass@1.94.2))(react@18.3.1)':
-    optionalDependencies:
-      next: 16.0.3(react-dom@19.2.0(react@18.3.1))(react@18.3.1)(sass@1.94.2)
-      react: 18.3.1
 
   '@vitejs/plugin-react-swc@3.10.2(vite@6.3.5(@types/node@22.0.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.2)(stylus@0.64.0)(sugarss@5.0.1(postcss@8.5.0))(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))':
     dependencies:
