@@ -117,7 +117,7 @@ importers:
         specifier: latest
         version: 1.30.2
       lucide-react:
-        specifier: ^0.487.0
+        specifier: 0.487.0
         version: 0.487.0(react@18.3.1)
       next:
         specifier: 16.0.3
