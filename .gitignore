@@ -1,0 +1,15 @@
+# Dependencies
+/node_modules
+
+# Next.js build output and cache
+/.next
+/out
+
+# Lock files
+/package-lock.json
+/pnpm-lock.yaml
+
+# Conflicting files we are deleting/ignoring
+/index.html
+/vite.config.*
+/postcss.config.*
