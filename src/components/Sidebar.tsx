@@ -1,25 +1,28 @@
-import { 
-  Home, 
-  DollarSign, 
-  CheckSquare, 
-  Clock, 
-  User, 
+"use client"
+
+import {
+  Home,
+  DollarSign,
+  CheckSquare,
+  Clock,
+  User,
   Menu,
   GraduationCap,
   LogOut,
-  BarChart3,
   Bell,
-  Filter
-} from "./icons";
-import { Button } from "./ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "./ui/sheet";
-import { useState } from "react";
+  Filter,
+  Share2,
+  Lightbulb,
+} from "./icons"
+import { Button } from "./ui/button"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "./ui/sheet"
+import { useState } from "react"
 
 interface SidebarProps {
-  currentPage: string;
-  onPageChange: (page: string) => void;
-  onLogout: () => void;
-  isMobile?: boolean;
+  currentPage: string
+  onPageChange: (page: string) => void
+  onLogout: () => void
+  isMobile?: boolean
 }
 
 const navigationItems = [
@@ -29,8 +32,10 @@ const navigationItems = [
   { id: "reminders", label: "Bills & Reminders", icon: Bell },
   { id: "tasks", label: "Task Manager", icon: CheckSquare },
   { id: "punctuality", label: "Punctuality Log", icon: Clock },
+  { id: "community", label: "Community Tips", icon: Share2 },
+  { id: "lifestyle", label: "Lifestyle Assessment", icon: Lightbulb },
   { id: "profile", label: "Profile Settings", icon: User },
-];
+]
 
 function SidebarContent({ currentPage, onPageChange, onLogout }: Omit<SidebarProps, "isMobile">) {
   return (
@@ -50,8 +55,8 @@ function SidebarContent({ currentPage, onPageChange, onLogout }: Omit<SidebarPro
             key={item.id}
             variant={currentPage === item.id ? "secondary" : "ghost"}
             className={`w-full justify-start gap-3 ${
-              currentPage === item.id 
-                ? "bg-sidebar-accent text-sidebar-accent-foreground" 
+              currentPage === item.id
+                ? "bg-sidebar-accent text-sidebar-accent-foreground"
                 : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             }`}
             onClick={() => onPageChange(item.id)}
@@ -74,11 +79,11 @@ function SidebarContent({ currentPage, onPageChange, onLogout }: Omit<SidebarPro
         </Button>
       </div>
     </div>
-  );
+  )
 }
 
 export function Sidebar({ currentPage, onPageChange, onLogout, isMobile = false }: SidebarProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   if (isMobile) {
     return (
@@ -91,29 +96,23 @@ export function Sidebar({ currentPage, onPageChange, onLogout, isMobile = false 
         </SheetTrigger>
         <SheetContent side="left" className="p-0 w-72" aria-describedby={undefined}>
           <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-          <SheetDescription className="sr-only">
-            Navigate through different sections of NextStep
-          </SheetDescription>
-          <SidebarContent 
-            currentPage={currentPage} 
+          <SheetDescription className="sr-only">Navigate through different sections of NextStep</SheetDescription>
+          <SidebarContent
+            currentPage={currentPage}
             onPageChange={(page) => {
-              onPageChange(page);
-              setMobileOpen(false);
-            }} 
+              onPageChange(page)
+              setMobileOpen(false)
+            }}
             onLogout={onLogout}
           />
         </SheetContent>
       </Sheet>
-    );
+    )
   }
 
   return (
     <div className="hidden md:block w-72 h-screen">
-      <SidebarContent 
-        currentPage={currentPage} 
-        onPageChange={onPageChange} 
-        onLogout={onLogout}
-      />
+      <SidebarContent currentPage={currentPage} onPageChange={onPageChange} onLogout={onLogout} />
     </div>
-  );
+  )
 }

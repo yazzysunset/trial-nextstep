@@ -128,9 +128,11 @@ export function Dashboard({ transactions, tasks, attendanceRecords, userName = "
   return (
     <div className="p-4 lg:p-6 space-y-6">
       {/* Welcome Section */}
-      <div className="space-y-2">
-        <h1 className="text-2xl lg:text-3xl">Welcome back, {userName}! 👋</h1> {/* Used userName prop */}
-        <p className="text-muted-foreground">Here's your progress overview.</p>
+      <div className="flex items-center justify-between">
+        <div className="space-y-2">
+          <h1 className="text-2xl lg:text-3xl">Welcome back, {userName}! 👋</h1> {/* Used userName prop */}
+          <p className="text-muted-foreground">Here's your progress overview.</p>
+        </div>
       </div>
 
       {/* Summary Cards */}

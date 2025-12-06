@@ -1,29 +1,34 @@
-import { Bell, Search, User } from "./icons";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuSeparator, 
-  DropdownMenuTrigger 
-} from "./ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Badge } from "./ui/badge";
+"use client"
+
+import { Bell, Search, User } from "./icons"
+import { Button } from "./ui/button"
+import { Input } from "./ui/input"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { Badge } from "./ui/badge"
 
 interface TopNavProps {
-  currentPage: string;
-  onPageChange: (page: string) => void;
-  onLogout: () => void;
+  currentPage: string
+  onPageChange: (page: string) => void
+  onLogout: () => void
 }
 
 const pageDisplayNames: Record<string, string> = {
   dashboard: "Dashboard",
-  budget: "Budget Tracker", 
+  budget: "Budget Tracker",
   tasks: "Task Manager",
   punctuality: "Punctuality Log",
-  profile: "Profile Settings"
-};
+  analytics: "Expense Analytics",
+  reminders: "Bills & Task Reminders",
+  community: "Community Tips & Peer Sharing",
+  profile: "Profile Settings",
+}
 
 export function TopNav({ currentPage, onPageChange, onLogout }: TopNavProps) {
   return (
@@ -37,11 +42,7 @@ export function TopNav({ currentPage, onPageChange, onLogout }: TopNavProps) {
       <div className="hidden lg:flex items-center gap-2 flex-1 max-w-md mx-8">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input 
-            placeholder="Search..." 
-            className="pl-10 bg-input-background border-0"
-            aria-label="Search"
-          />
+          <Input placeholder="Search..." className="pl-10 bg-input-background border-0" aria-label="Search" />
         </div>
       </div>
 
@@ -58,8 +59,8 @@ export function TopNav({ currentPage, onPageChange, onLogout }: TopNavProps) {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-4 w-4" />
-              <Badge 
-                variant="destructive" 
+              <Badge
+                variant="destructive"
                 className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
               >
                 3
@@ -124,5 +125,5 @@ export function TopNav({ currentPage, onPageChange, onLogout }: TopNavProps) {
         </DropdownMenu>
       </div>
     </header>
-  );
+  )
 }

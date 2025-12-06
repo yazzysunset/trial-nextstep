@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
 import { AlertCircle } from "lucide-react"
 import { Alert, AlertDescription } from "./ui/alert"
 import { Eye, EyeOff, Check, X } from "./icons"
+import { Checkbox } from "./ui/checkbox"
 
 interface LoginProps {
   onLogin: (userData: { firstName: string; lastName: string; email: string }) => void
@@ -31,6 +32,7 @@ export function Login({ onLogin }: LoginProps) {
     email: "",
     password: "",
     confirmPassword: "",
+    termsAccepted: false,
   })
 
   const [error, setError] = useState("")
@@ -56,7 +58,6 @@ export function Login({ onLogin }: LoginProps) {
     e.preventDefault()
     setError("")
 
-    // Simulate login - in a real app this would validate against a backend
     const savedUserData = localStorage.getItem("userData")
     if (savedUserData) {
       const user = JSON.parse(savedUserData)
@@ -66,10 +67,7 @@ export function Login({ onLogin }: LoginProps) {
       }
     }
 
-    // If no user found or email doesn't match (simplified for this demo)
-    // For demo purposes, we'll allow login if fields are filled
     if (loginData.email && loginData.password) {
-      // Try to get name from email if not in storage
       const namePart = loginData.email.split("@")[0]
       const mockUser = {
         firstName: namePart.charAt(0).toUpperCase() + namePart.slice(1),
@@ -85,6 +83,11 @@ export function Login({ onLogin }: LoginProps) {
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
+
+    if (!signupData.termsAccepted) {
+      setError("You must accept the Terms and Conditions to create an account.")
+      return
+    }
 
     if (!signupData.firstName || !signupData.lastName || !signupData.email || !signupData.password) {
       setError("All fields are required.")
@@ -108,7 +111,6 @@ export function Login({ onLogin }: LoginProps) {
       email: signupData.email,
     }
 
-    // Save to local storage
     localStorage.setItem("userData", JSON.stringify(newUser))
     onLogin(newUser)
   }
@@ -239,6 +241,17 @@ export function Login({ onLogin }: LoginProps) {
                     value={signupData.confirmPassword}
                     onChange={(e) => setSignupData({ ...signupData, confirmPassword: e.target.value })}
                   />
+                </div>
+                <div className="flex items-start gap-2 mt-4 p-3 bg-muted/50 rounded">
+                  <Checkbox
+                    id="terms-agree"
+                    checked={signupData.termsAccepted}
+                    onCheckedChange={(checked) => setSignupData({ ...signupData, termsAccepted: checked as boolean })}
+                    className="mt-1"
+                  />
+                  <Label htmlFor="terms-agree" className="text-xs font-medium cursor-pointer">
+                    I agree to the Terms and Conditions and understand all policies
+                  </Label>
                 </div>
                 <Button type="submit" className="w-full">
                   Create Account

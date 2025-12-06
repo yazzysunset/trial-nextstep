@@ -11,8 +11,20 @@ import { TopNav } from "./components/TopNav"
 import { ExpenseAnalyticsDashboard } from "./components/ExpenseAnalyticsDashboard"
 import { BillAndTaskReminders } from "./components/BillAndTaskReminders"
 import { Login } from "./components/Login"
+import { CommunityTips } from "./components/CommunityTips"
+import { LandingPage } from "./components/LandingPage"
+import { LifestyleAssessment } from "./components/LifestyleAssessment"
 
-type CurrentPage = "dashboard" | "budget" | "tasks" | "punctuality" | "profile" | "analytics" | "reminders"
+type CurrentPage =
+  | "dashboard"
+  | "budget"
+  | "tasks"
+  | "punctuality"
+  | "profile"
+  | "analytics"
+  | "reminders"
+  | "community"
+  | "lifestyle" // Added lifestyle assessment page
 
 interface Transaction {
   id: string
@@ -366,12 +378,14 @@ export default function App() {
 
   const [user, setUser] = useState<{ firstName: string; lastName: string; email: string } | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [showLandingPage, setShowLandingPage] = useState(true)
 
   useEffect(() => {
     const savedUserData = localStorage.getItem("userData")
     if (savedUserData) {
       try {
         setUser(JSON.parse(savedUserData))
+        setShowLandingPage(false)
       } catch (e) {
         console.error("Failed to parse user data", e)
       }
@@ -382,6 +396,7 @@ export default function App() {
   const handleLogin = (userData: { firstName: string; lastName: string; email: string }) => {
     setUser(userData)
     localStorage.setItem("userData", JSON.stringify(userData))
+    setShowLandingPage(false)
   }
 
   const handleLogout = () => {
@@ -392,14 +407,6 @@ export default function App() {
 
   const handleUpdateUser = (userData: { firstName: string; lastName: string; email: string }) => {
     setUser((prev) => ({ ...prev, ...userData }))
-  }
-
-  if (isLoading) {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>
-  }
-
-  if (!user) {
-    return <Login onLogin={handleLogin} />
   }
 
   const renderCurrentPage = () => {
@@ -425,6 +432,10 @@ export default function App() {
         return <ExpenseAnalyticsDashboard transactions={transactions} />
       case "reminders":
         return <BillAndTaskReminders reminders={reminders} setReminders={setReminders} />
+      case "community":
+        return <CommunityTips />
+      case "lifestyle": // Added lifestyle assessment case
+        return <LifestyleAssessment />
       default:
         return (
           <Dashboard
@@ -435,6 +446,18 @@ export default function App() {
           />
         )
     }
+  }
+
+  if (isLoading) {
+    return <div className="flex items-center justify-center h-screen">Loading...</div>
+  }
+
+  if (showLandingPage) {
+    return <LandingPage onGetStarted={() => setShowLandingPage(false)} />
+  }
+
+  if (!user) {
+    return <Login onLogin={handleLogin} />
   }
 
   return (
